@@ -1,5 +1,5 @@
 [project]
-name = "runtime-docs"
+name = "runtime-docstrings"
 version = "0.0.0"
 description = "Runtime access to Python class attribute docstrings (PEP 224)"
 readme = "README.md"

@@ -36,7 +36,7 @@ jobs:
 
     environment:
       name: pypi
-      url: https://pypi.org/p/runtime-docs
+      url: https://pypi.org/p/runtime-docstrings
 
     steps:
       - name: Retrieve release distributions
@@ -47,5 +47,3 @@ jobs:
 
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
