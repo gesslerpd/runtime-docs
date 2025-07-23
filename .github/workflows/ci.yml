@@ -8,8 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -18,18 +17,23 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Install uv and set the python version
-      uses: astral-sh/setup-uv@v6
+    - uses: astral-sh/setup-uv@v6
       with:
         python-version: ${{ matrix.python-version }}
         enable-cache: true
-
     - name: Setup
       run: |
         uv sync
-    - name: Lint
-      run: |
-        ruff check
     - name: Test
       run: |
         pytest
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - uses: astral-sh/setup-uv@v6
+    - name: Lint
+      run: |
+        uvx ruff check
