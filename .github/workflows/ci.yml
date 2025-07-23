@@ -21,12 +21,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         enable-cache: true
-    - name: Setup
-      run: |
-        uv sync
     - name: Test
       run: |
-        pytest
+        uv run pytest
 
   lint:
     runs-on: ubuntu-latest
