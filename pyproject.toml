@@ -1,6 +1,6 @@
 [project]
 name = "runtime-docstrings"
-version = "0.1.0"
+version = "0.1.1"
 description = "Runtime access to Python class attribute docstrings (PEP 224)"
 readme = "README.md"
 authors = [{ name = "gesslerpd", email = "gesslerpd@users.noreply.github.com" }]

@@ -9,9 +9,6 @@ from textwrap import dedent
 import ast
 import types
 from enum import Enum
-from typing import TypeVar
-
-T = TypeVar("T", bound=type)
 
 
 def _parse_docstrings(node: ast.ClassDef) -> dict[str, str]:
@@ -35,6 +32,15 @@ def _parse_docstrings(node: ast.ClassDef) -> dict[str, str]:
 
 
 def get_docstrings(cls: type) -> dict[str, str]:
+    """Parse and return a mapping of attribute names to their docstrings for a given class.
+
+    Args:
+        cls: The class to parse attribute docstrings from.
+
+    Returns:
+        A dictionary where keys are attribute names and values are their
+        corresponding docstrings.
+    """
     if "__attribute_docs__" in cls.__dict__:
         return cls.__attribute_docs__
     source = dedent(inspect.getsource(cls))
@@ -76,7 +82,18 @@ def _attach_enum(cls: type[Enum], comments: dict[str, str]) -> None:
                 member.__doc__ = comments[name]
 
 
-def docstrings(cls: T) -> T:
+def docstrings(cls: type) -> type:
+    """Decorator that attaches attribute/member docstrings to a class.
+
+    If the class is an enum, docstrings are attached via enum members.
+
+    If the class is a dataclass, docstrings are attached via field metadata.
+
+    Parameters:
+        cls: The class to process.
+    Returns:
+        The same class with attached docstrings.
+    """
     assert inspect.isclass(cls), "cls must be a class"
 
     # Extract docstrings from the class definition
