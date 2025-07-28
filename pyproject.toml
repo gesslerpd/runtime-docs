@@ -1,8 +1,21 @@
 [project]
 name = "runtime-docstrings"
-version = "0.1.1"
+version = "0.1.2"
 description = "Runtime access to Python class attribute docstrings (PEP 224)"
 readme = "README.md"
+license = "MIT"
+keywords = [
+    "docstrings",
+    "PEP 224",
+    "pep224",
+    "class attributes",
+    "error reporting",
+    "enum",
+    "dataclasses",
+    "ast",
+    "sphinx",
+    "autodoc",
+]
 authors = [{ name = "gesslerpd", email = "gesslerpd@users.noreply.github.com" }]
 requires-python = ">=3.10"
 dependencies = []
