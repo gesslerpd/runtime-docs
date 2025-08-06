@@ -14,8 +14,12 @@ from enum import Enum
 def _parse_docstrings(node: ast.ClassDef) -> dict[str, str]:
     docs: dict[str, str] = {}
     body = node.body
-    for index in range(len(body) - 1):
-        match body[index]:
+    end = len(body) - 1
+    index = 0
+    while index < end:
+        stmt = body[index]
+        index += 1
+        match stmt:
             case ast.AnnAssign(target=ast.Name(id=name)):
                 pass
             case ast.Assign(targets=[ast.Name(id=name)]):
@@ -23,11 +27,12 @@ def _parse_docstrings(node: ast.ClassDef) -> dict[str, str]:
             case _:
                 continue
 
-        match body[index + 1]:
+        match body[index]:
             case ast.Expr(value=ast.Constant(value=doc_str)) if isinstance(
                 doc_str, str
             ):
                 docs[name] = inspect.cleandoc(doc_str)
+                index += 1
     return docs
 
 
